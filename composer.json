@@ -1,7 +1,6 @@
 {
   "name": "AnitaBath/CakePHP-Behat",
   "type": "cakephp-plugin",
-  "version": "0.1.0",
   "require": {
       "composer/installers": "*",
       "behat/mink-extension": "*"
