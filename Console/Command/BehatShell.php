@@ -7,42 +7,14 @@ App::uses('Shell', 'Console');
 App::uses('Folder', 'Utility');
 App::uses('File', 'Utility');
 
+App::uses('behat/behat', 'Vendor');
+App::uses('behat/mink', 'Vendor');
+App::uses('behat/mink-extension', 'Vendor');
+
 /**
  * Behat shell.
  */
 class BehatShell extends Shell {
-
-    /**
-     * An storage of links to PHAR archives
-     *
-     * @var array
-     */
-    public $storage = array(
-        'behat.phar' => 'http://behat.org/downloads/behat.phar',
-        'mink.phar' => 'http://behat.org/downloads/mink.phar',
-        'mink_extension.phar' => 'http://behat.org/downloads/mink_extension.phar',
-    );
-
-    /**
-     * Behat File path
-     *
-     * @string
-     */
-    public $behatFile;
-
-    /**
-     * Mink File path
-     *
-     * @string
-     */
-    public $minkFile;
-
-    /**
-     * Mink Extension File path
-     *
-     * @string
-     */
-    public $minkExtFile;
 
     /**
      * Behat Application Object
@@ -59,9 +31,6 @@ class BehatShell extends Shell {
     public function startup() {
         $this->out('Cake Behat Shell');
         $this->hr();
-        $this->behatFile = $this->_getPath() . 'Vendor' . DS . 'behat.phar';
-        $this->minkFile = $this->_getPath() . 'Vendor' . DS . 'mink.phar';
-        $this->minkExtFile = $this->_getPath() . 'Vendor' . DS . 'mink_extension.phar';
     }
 
     /**
@@ -70,10 +39,6 @@ class BehatShell extends Shell {
      * @return void
      */
     public function install() {
-        // Download all the things
-        foreach ($this->storage as $name => $link) {
-            $this->__install($name, $link);
-        }
         // Setup Behat Console
         $file = new File($this->_getPath() . DS . 'skel' . DS . 'behat');
         $this->out('Copying behat to App/Console...');
@@ -94,9 +59,6 @@ class BehatShell extends Shell {
      * @return void
      */
     public function main() {
-        require_once 'phar://' . $this->behatFile . '/vendor/autoload.php';
-        require_once 'phar://' . $this->minkFile . '/vendor/autoload.php';
-        require_once 'phar://' . $this->minkExtFile . '/init.php';
         // Internal encoding to utf8
         mb_internal_encoding('utf8');
         // Get rid of Cake default args
@@ -157,56 +119,6 @@ class BehatShell extends Shell {
      */
     protected function _getPath() {
         return App::pluginPath('Behat');
-    }
-
-    /**
-     * __install method
-     *
-     * @param string $name
-     * @param string $link
-     *
-     * @return void
-     */
-    private function __install($name, $link) {
-        switch ($name) {
-            case 'behat.phar' :
-                $filePath = $this->behatFile; break;
-            case 'mink.phar' :
-                $filePath = $this->minkFile; break;
-            case 'mink_extension.phar' :
-                $filePath = $this->minkExtFile; break;
-            default : $filePath = '';
-        }
-        if (!file_exists($filePath)) {
-            $this->out("Downloading {$name}...");
-            $this->__download($link, $filePath);
-            $this->out('Done');
-        }
-    }
-
-    /**
-     * Download the file
-     *
-     * @param string $url
-     * @param string $path
-     * @return void
-     */
-    private function __download($url, $path) {
-        $file = fopen($url, 'rb');
-        if ($file) {
-            $newFile = fopen($path, 'wb');
-            if ($newFile) {
-                while(!feof($file)) {
-                    fwrite($newFile, fread($file, 1024 * 8 ), 1024 * 8 );
-                }
-            }
-        }
-        if ($file) {
-            fclose($file);
-        }
-        if ($newFile) {
-            fclose($newFile);
-        }
     }
 }
 
