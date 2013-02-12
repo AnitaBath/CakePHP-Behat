@@ -20,6 +20,7 @@ Shell for testing CakePHP Application using Behat
   , 
 }
 ```
+
 _The Plugin's composer file references a composer library called installers that contains
 installation paths for many frameworks, including cakephp. This library
 will create a Plugin directory in your current directory, so, if it happens
