@@ -7,6 +7,7 @@ Shell for testing CakePHP Application using Behat
 
 - Create a composer.json file at the root of your project. Add or
   complete the `repositories` section with the following code :
+
 ```
 {
    "name" :        "YourProjectName"
@@ -17,7 +18,6 @@ Shell for testing CakePHP Application using Behat
         }
    ]
   , "minimum-stability": "dev"
-  , 
 }
 ```
 
