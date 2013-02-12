@@ -21,7 +21,7 @@ Shell for testing CakePHP Application using Behat
 }
 ```
 
-_The Plugin's composer file references a composer library called __installers__ that contains
+_The Plugin's composer file references a composer library called **installers** that contains
 installation paths for many frameworks, including cakephp. This library
 will create a Plugin directory in your current directory, so, if it happens
 that the root of your project is a the same level as `app` and not `app`
