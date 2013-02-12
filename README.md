@@ -3,7 +3,44 @@
 Shell for testing CakePHP Application using Behat
 
 ## Installation
+### Composer installation
 
+- Create a composer.json file at the root of your project. Add or
+  complete the `repositories` section with the following code :
+```
+{
+   "name" :        "YourProjectName"
+ , "repositories": [
+        {
+            "type" : "vcs"
+          , "url": "git://github.com/AnitaBath/CakePHP-Behat.git"
+        }
+   ]
+  , "minimum-stability": "dev"
+  , 
+}
+```
+_The Plugin's composer file references a composer library called installers that contains
+installation paths for many frameworks, including cakephp. This library
+will create a Plugin directory in your current directory, so, if it happens
+that the root of your project is a the same level as `app` and not `app`
+itself, I would recommend you to add or complete the `extra` section of
+your composer file in the following way :_
+
+```
+"extra" : {
+        "installer-paths": {
+            "app/Plugin/Behat": [ "AnitaBath/CakePHP-Behat" ]
+        }
+    }
+```
+
+- Add the plugin to your app/Config/bootstrap.php using `CakePlugin::load('Behat')`
+- Set your application root url into app/Config/behat.yml
+- Make behat executable `chmod +x Console/behat`
+- Run `Console/behat -dl` to be sure that everything properly loaded
+
+### Regular installation
 - Unzip or clone this plugin into your app/Plugin/Behat folder.
 - Add the plugin to your app/Config/bootstrap.php using `CakePlugin::load('Behat')`
 - Run `Console/cake Behat.behat install` to install plugin
