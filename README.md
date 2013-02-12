@@ -21,7 +21,7 @@ Shell for testing CakePHP Application using Behat
 }
 ```
 
-_The Plugin's composer file references a composer library called installers that contains
+_The Plugin's composer file references a composer library called __installers__ that contains
 installation paths for many frameworks, including cakephp. This library
 will create a Plugin directory in your current directory, so, if it happens
 that the root of your project is a the same level as `app` and not `app`
@@ -35,11 +35,12 @@ your composer file in the following way :_
         }
     }
 ```
-
+- Run the composer install command : ``` php composer.phar install ```
+  or ``` composer install ``` if you did a [global install](http://getcomposer.org/doc/00-intro.md#globally)
 - Add the plugin to your app/Config/bootstrap.php using `CakePlugin::load('Behat')`
 - Set your application root url into app/Config/behat.yml
 - Make behat executable `chmod +x Console/behat`
-- Run `Console/behat -dl` to be sure that everything properly loaded
+- Run `Console/behat -dl` to be sure that everything is properly loaded
 
 ### Regular installation
 - Unzip or clone this plugin into your app/Plugin/Behat folder.
